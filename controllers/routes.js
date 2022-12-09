@@ -58,7 +58,7 @@ router.get("/mentor/schedule", checkAuth, (req, res) => {
     const user = req.user.email;
     res.render("mentor-schedule", { user: user });
   } else {
-    res.redirect("/");
+    res.redirect("/mentor/schedule");
   }
 });
 
@@ -86,9 +86,9 @@ router.post("/mentor/schedule", checkAuth, (req, res) => {
     };
     transporter.sendMail(mailOptions, function (error, info) {
       if (error) {
-        res.redirect("/mentor");
+        res.redirect("/mentor/schedule");
       } else {
-        res.redirect("/mentor");
+        res.redirect("/mentor/schedule");
       }
     });
   } else {
