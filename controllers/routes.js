@@ -14,7 +14,7 @@ const dotenv = require("dotenv");
 dotenv.config();
 require("./passportLocal")(passport);
 
-var bodyParser = require('body-parser') ;
+var bodyParser = require('body-parser');
 app.use(bodyParser.json())
 
 function checkAuth(req, res, next) {
@@ -262,7 +262,7 @@ router.post("/admin/new-job", checkAuth, (req, res) => {
       //   })
       //   .then((message) => {
       //     console.log(message.sid);
-          res.redirect("/admin/view-job");
+      res.redirect("/admin/view-job");
       //   })
       //   .catch((e) => {
       //     console.log(e);
@@ -283,7 +283,7 @@ router.get("/admin/view-job", checkAuth, (req, res) => {
     if (data) {
       jobs = data;
     }
-    res.render("jobs", { data: jobs, user_email: "admin@gmail.com"});
+    res.render("jobs", { data: jobs, user_email: "admin@gmail.com" });
   });
 });
 
@@ -408,6 +408,14 @@ router.post("/admin/delete-user", checkAuth, (req, res) => {
     return res.redirect("/");
   }
   const id = req.body.id;
+  alumni.findOneAndDelete({ email: req.body.email }, (err, doc) => {
+    if (err) {
+      console.log(err)
+    }
+    else {
+      console.log("Deleted User : ", doc);
+    }
+  });
   user.findOneAndRemove({ _id: id }, (err, doc) => {
     res.redirect("/admin/users");
   });
@@ -566,7 +574,7 @@ router.post("/admin/verifyAlumni", checkAuth, async (req, res) => {
 
 router.get("/mm-hub", checkAuth, (req, res) => {
   console.log(req.user.designation);
-  res.render("mm-hub", {des: req.user.designation});
+  res.render("mm-hub", { des: req.user.designation });
 });
 router.get("/mm-job", checkAuth, (req, res) => {
   var jobs;

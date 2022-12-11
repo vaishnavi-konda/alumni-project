@@ -166,6 +166,7 @@
                             <p class="card-text">Email: <%= users.email %><br/>Designation: <%= users.designation %><br/>
                               <form action="/admin/delete-user" method="POST">
                                 <input type="hidden" name="id" value="<%= users.id %>">
+                                <input type="hidden" name="email" value="<%= users.email%>">
                                 <button type="submit" class="btn btn-outlined dark" style="color: white;background:linear-gradient(60deg, #68345c, #5e0443);">Delete</button>
                               </form>
                             </p>
