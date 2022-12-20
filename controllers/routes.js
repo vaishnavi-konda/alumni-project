@@ -187,7 +187,10 @@ router.post("/signup", (req, res) => {
         .then((user) => {
           res.redirect("/login");
         })
-        .catch((err) => console.log(err));
+        .catch((err) => {
+          window.alert("Invalid details! Please Try again");
+          console.log(err);
+        });
     });
   });
 });
@@ -196,6 +199,7 @@ router.post(
   "/login",
   passport.authenticate("local", {
     failureRedirect: "/login",
+    failureFlash: true
   }),
   (req, res, next) => {
     if (req.user.isAdmin === true) {
