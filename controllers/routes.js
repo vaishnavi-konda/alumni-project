@@ -101,13 +101,14 @@ router.get("/menteeOfMentor", checkAuth, async (req, res) => {
     mentorEmail = req.user.email;
     mentorData = await user.findOne({ mentorEmail: mentorEmail });
     console.log("Mentor data ", mentorData);
-    if (mentorData["mentorEmail"]) {
-      dataOfMentee = await user.findOne({ email: mentorData["menteeEmail"] });
-      console.log(dataOfMentee);
-      res.render("menteeOfMentor", { data: dataOfMentee });
-    } else {
-      res.render("menteeOfMentor", { data: "No mentee assigned" });
-    }
+    res.render("menteeOfMentor", { data: mentorData });
+    // if (mentorData["mentorEmail"]) {
+    //   dataOfMentee = await user.findOne({ email: mentorData["menteeEmail"] });
+    //   console.log(dataOfMentee);
+    //   res.render("menteeOfMentor", { data: dataOfMentee });
+    // } else {
+    //   res.render("menteeOfMentor", { data: "No mentee assigned" });
+    // }
   } else {
     res.redirect("/");
   }
